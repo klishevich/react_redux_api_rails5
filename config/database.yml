@@ -21,7 +21,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: db/test.sqlite3
+  database: react_redux_api_rails5_test
 
 production:
   <<: *default
