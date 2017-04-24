@@ -4,38 +4,44 @@ class ListsController < ApplicationController
   	render json: @lists
   end
 
-  def new
-    @list = List.new
-  end
-
-  # def create
-  #   @category = Category.new(list_params)
-  #   if @category.save
-  #     flash[:success] = t(:saved_successfuly)
-  #     redirect_to edit_category_path @category
-  #   else
-  #     render 'new'
-  #   end  
-  # end
-
   def create
     @list = List.new(list_params)
-    if @list.save
-      @lists = List.all
+    if @list.save!
+      render status: 201, json: @list
     else
-      #TODO: add errors
-      @lists = List.all
+      render status: 500, json: @list
     end
-    render json: @lists
+  end
+
+  def show
+    @list = find_list
+    render json: @list
   end
 
   def update
+    @list = find_list
+    @list.update(list_params)
+    render status: 200, json: @list
   end
 
-  def delete
+  def destroy
+    @list = find_list
+    @list.destroy!
+    head :no_content
   end
 
   def list_params
-    params.require(:list).permit(:name, :order)
-  end 
+    params.require(:list).permit(:name,
+                                 :order,
+                                 :first_name,
+                                 :last_name,
+                                 :birth_date,
+                                 :is_alive)
+  end
+
+  private
+
+  def find_list
+    List.find(params[:id])
+  end
 end
