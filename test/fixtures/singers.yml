@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  first_name: MyString
+  last_name: MyString
+  order: 1
+  birth_date: 2017-05-02
+  is_alive: false
+
+two:
+  first_name: MyString
+  last_name: MyString
+  order: 1
+  birth_date: 2017-05-02
+  is_alive: false
